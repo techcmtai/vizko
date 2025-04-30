@@ -216,28 +216,28 @@ export default function ProductComparison({
 
   return (
     <div className={`fixed bottom-0 left-0 right-0 bg-primary shadow-lg border-t border-primary/80 transition-all duration-300 z-50 ${
-      isExpanded ? 'max-h-[80vh]' : 'max-h-28'
+      isExpanded ? 'max-h-[90vh] md:max-h-[80vh]' : 'max-h-20 sm:max-h-28'
     }`}>
-      <div className="container mx-auto p-4">
+      <div className="container mx-auto px-2 sm:px-4 py-1 sm:py-2">
         {/* Header */}
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 sm:gap-2 mb-1 sm:mb-2">
           <div className="flex items-center">
-            <h3 className="font-semibold text-lg text-white">
-              Compare Products <span className="text-sm font-normal text-gray-200">({compareProducts.length}/4)</span>
+            <h3 className="font-semibold text-sm sm:text-base md:text-lg text-white">
+              Compare <span className="hidden sm:inline">Products</span> <span className="text-xs sm:text-sm font-normal text-gray-200">({compareProducts.length}/4)</span>
             </h3>
           </div>
           
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-1 sm:gap-2 w-full sm:w-auto">
             {/* Export to PDF button */}
             <Button
               variant="outline"
               size="sm"
               onClick={generatePDF}
               disabled={isExporting || compareProducts.length === 0}
-              className="text-back border-white hover:bg-white/10"
+              className="text-back border-white hover:bg-white/10 flex-1 sm:flex-none h-8 sm:h-9 text-xs sm:text-sm"
             >
-              <FileDown className="w-4 h-4 mr-1" />
-              Export PDF
+              <FileDown className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+              <span className="hidden sm:inline">Export PDF</span>
             </Button>
             
             {/* Share on WhatsApp button */}
@@ -246,17 +246,17 @@ export default function ProductComparison({
               size="sm"
               onClick={shareOnWhatsApp}
               disabled={isExporting || compareProducts.length === 0}
-              className="text-black border-white hover:bg-white/10"
+              className="text-black border-white hover:bg-white/10 flex-1 sm:flex-none h-8 sm:h-9 text-xs sm:text-sm"
             >
-              <Share2 className="w-4 h-4 mr-1" />
-              Share on WhatsApp
+              <Share2 className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+              <span className="hidden sm:inline">Share</span>
             </Button>
             
             <Button
               variant="ghost"
               size="sm"
               onClick={onClearAll}
-              className="text-gray-200 hover:text-white hover:bg-white/10"
+              className="text-gray-200 hover:text-white hover:bg-white/10 flex-1 sm:flex-none h-8 sm:h-9 text-xs sm:text-sm"
             >
               Clear All
             </Button>
@@ -265,153 +265,156 @@ export default function ProductComparison({
               variant="ghost"
               size="sm"
               onClick={() => setIsExpanded(!isExpanded)}
-              className="text-white"
+              className="text-white flex-1 sm:flex-none h-8 sm:h-9 text-xs sm:text-sm"
             >
               {isExpanded ? (
                 <>
-                  <MoveDown className="w-4 h-4 mr-1" />
-                  Close
+                  <MoveDown className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                  <span className="hidden sm:inline">Close</span>
                 </>
               ) : (
                 <>
-                  <MoveUp className="w-4 h-4 mr-1" />
-                  Expand
+                  <MoveUp className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                  <span className="hidden sm:inline">Expand</span>
                 </>
               )}
             </Button>
           </div>
         </div>
 
-        {/* Comparison table */}
-       <div className="overflow-x-auto">
-  <table
-    ref={tableRef}
-    className="w-full table-fixed border-collapse bg-white rounded-lg overflow-hidden"
-  >
-    <thead>
-      <tr className="border-b border-gray-200">
-        <th className="text-left p-2 w-[120px] bg-gray-50 whitespace-nowrap">
-          Feature
-        </th>
-        {compareProducts.map((product) => (
-          <th key={product.id} className="p-2 min-w-[200px]">
-            <div className="flex flex-col items-center">
-              {/* Product Image with remove button */}
-              <div className="relative w-full mb-3">
-                <img
-                  src={product.image}
-                  alt={product.title}
-                  className="w-28 h-28 sm:w-32 sm:h-32 object-cover mx-auto rounded-md shadow-sm"
-                />
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="absolute -top-2 -right-2 h-6 w-6 rounded-full bg-white border border-gray-200"
-                  onClick={() => onRemoveFromCompare(product.id)}
-                >
-                  <X className="h-3 w-3" />
-                </Button>
-              </div>
+        {/* Comparison table - Only show when expanded */}
+        {isExpanded && (
+          <div className="overflow-x-auto -mx-2 sm:mx-0">
+            <div className="min-w-[600px] sm:min-w-[800px] md:min-w-0">
+              <table
+                ref={tableRef}
+                className="w-full table-fixed border-collapse bg-white rounded-lg"
+              >
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="text-left p-1 sm:p-2 w-[100px] sm:w-[120px] bg-gray-50 whitespace-nowrap sticky left-0 z-10">
+                      Feature
+                    </th>
+                    {compareProducts.map((product) => (
+                      <th key={product.id} className="p-1 sm:p-2 min-w-[150px] sm:min-w-[200px]">
+                        <div className="flex flex-col items-center">
+                          {/* Product Image with remove button */}
+                          <div className="relative w-full mb-1 sm:mb-2">
+                            <img
+                              src={product.image}
+                              alt={product.title}
+                              className="w-16 h-16 sm:w-24 sm:h-24 md:w-28 md:h-28 object-cover mx-auto rounded-md shadow-sm"
+                            />
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 h-4 w-4 sm:h-5 sm:w-5 rounded-full bg-white border border-gray-200"
+                              onClick={() => onRemoveFromCompare(product.id)}
+                            >
+                              <X className="h-2 w-2 sm:h-3 sm:w-3" />
+                            </Button>
+                          </div>
 
-              {/* Product info below image */}
-              <div className="w-full text-center px-2">
-                <h4 className="text-sm font-medium line-clamp-1 mb-1">
-                  {product.title.split("\n\n")[0]}
-                </h4>
-                <p className="text-xs text-gray-600 line-clamp-2 mb-2">
-                  {product.description}
-                </p>
-                <p className="text-primary font-bold">
-                  ₹{product.price.toLocaleString()}
-                </p>
-              </div>
+                          {/* Product info below image */}
+                          <div className="w-full text-center px-1 sm:px-2">
+                            <h4 className="text-[10px] sm:text-xs md:text-sm font-medium line-clamp-1 mb-0.5 sm:mb-1">
+                              {product.title.split("\n\n")[0]}
+                            </h4>
+                            <p className="text-[8px] sm:text-[10px] md:text-xs text-gray-600 line-clamp-2 mb-0.5 sm:mb-1">
+                              {product.description}
+                            </p>
+                            <p className="text-primary font-bold text-xs sm:text-sm md:text-base">
+                              ₹{product.price.toLocaleString()}
+                            </p>
+                          </div>
+                        </div>
+                      </th>
+                    ))}
+                    {/* Empty cells for missing products */}
+                    {Array.from({ length: 4 - compareProducts.length }).map((_, i) => (
+                      <th key={`empty-${i}`} className="p-1 sm:p-2 min-w-[150px] sm:min-w-[200px]">
+                        <div className="flex flex-col items-center">
+                          <div className="w-16 h-16 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-gray-100 rounded-md flex items-center justify-center">
+                            <span className="text-gray-400 text-[8px] sm:text-[10px] md:text-xs">Add product</span>
+                          </div>
+                        </div>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {/* Category */}
+                  <tr className="border-b border-gray-200 bg-gray-50">
+                    <td className="p-1 sm:p-2 font-medium sticky left-0 z-10 bg-gray-50 text-xs sm:text-sm">Category</td>
+                    {compareProducts.map((product) => (
+                      <td key={`cat-${product.id}`} className="p-1 sm:p-2 text-center capitalize text-xs sm:text-sm">
+                        {product.category}
+                      </td>
+                    ))}
+                    {Array.from({ length: 4 - compareProducts.length }).map((_, i) => (
+                      <td key={`empty-cat-${i}`} className="p-1 sm:p-2"></td>
+                    ))}
+                  </tr>
+
+                  {/* Dimensions */}
+                  <tr className="border-b border-gray-200">
+                    <td className="p-1 sm:p-2 font-medium sticky left-0 z-10 bg-white text-xs sm:text-sm">Dimensions</td>
+                    {compareProducts.map((product) => (
+                      <td key={`dim-${product.id}`} className="p-1 sm:p-2 text-center text-[10px] sm:text-xs md:text-sm">
+                        {product.length}" × {product.breadth}" × {product.height}"
+                      </td>
+                    ))}
+                    {Array.from({ length: 4 - compareProducts.length }).map((_, i) => (
+                      <td key={`empty-dim-${i}`} className="p-1 sm:p-2"></td>
+                    ))}
+                  </tr>
+
+                  {/* Description */}
+                  <tr className="border-b border-gray-200 bg-gray-50">
+                    <td className="p-1 sm:p-2 font-medium sticky left-0 z-10 bg-gray-50 text-xs sm:text-sm">Description</td>
+                    {compareProducts.map((product) => (
+                      <td key={`desc-${product.id}`} className="p-1 sm:p-2 text-[8px] sm:text-[10px] md:text-xs">
+                        <p className="line-clamp-4 text-gray-700">{product.description}</p>
+                      </td>
+                    ))}
+                    {Array.from({ length: 4 - compareProducts.length }).map((_, i) => (
+                      <td key={`empty-desc-${i}`} className="p-1 sm:p-2"></td>
+                    ))}
+                  </tr>
+
+                  {/* Layers */}
+                  <tr className="border-b border-gray-200">
+                    <td className="p-1 sm:p-2 font-medium sticky left-0 z-10 bg-white text-xs sm:text-sm">Layers</td>
+                    {compareProducts.map((product) => (
+                      <td key={`layer-${product.id}`} className="p-1 sm:p-2 text-[8px] sm:text-[10px] md:text-xs">
+                        <p className="text-gray-700">{product.additionalDescription}</p>
+                      </td>
+                    ))}
+                    {Array.from({ length: 4 - compareProducts.length }).map((_, i) => (
+                      <td key={`empty-layer-${i}`} className="p-1 sm:p-2"></td>
+                    ))}
+                  </tr>
+
+                  {/* Price */}
+                  <tr className="border-b border-gray-200 bg-gray-50">
+                    <td className="p-1 sm:p-2 font-medium sticky left-0 z-10 bg-gray-50 text-xs sm:text-sm">Price</td>
+                    {compareProducts.map((product) => (
+                      <td key={`price-${product.id}`} className="p-1 sm:p-2 text-center">
+                        <p className="text-sm sm:text-base md:text-lg font-bold text-primary">
+                          ₹{product.price.toLocaleString()}
+                        </p>
+                      </td>
+                    ))}
+                    {Array.from({ length: 4 - compareProducts.length }).map((_, i) => (
+                      <td key={`empty-price-${i}`} className="p-1 sm:p-2"></td>
+                    ))}
+                  </tr>
+                </tbody>
+              </table>
             </div>
-          </th>
-        ))}
-        {/* Empty cells for missing products */}
-        {Array.from({ length: 4 - compareProducts.length }).map((_, i) => (
-          <th key={`empty-${i}`} className="p-2 min-w-[200px]">
-            <div className="flex flex-col items-center">
-              <div className="w-28 h-28 sm:w-32 sm:h-32 bg-gray-100 rounded-md flex items-center justify-center">
-                <span className="text-gray-400 text-sm">Add product</span>
-              </div>
-            </div>
-          </th>
-        ))}
-      </tr>
-    </thead>
-
-    <tbody className={`${isExpanded ? "block" : "hidden"}`}>
-      {/* Category */}
-      <tr className="border-b border-gray-200 bg-gray-50">
-        <td className="p-2 font-medium">Category</td>
-        {compareProducts.map((product) => (
-          <td key={`cat-${product.id}`} className="p-2 text-center capitalize">
-            {product.category}
-          </td>
-        ))}
-        {Array.from({ length: 4 - compareProducts.length }).map((_, i) => (
-          <td key={`empty-cat-${i}`} className="p-2"></td>
-        ))}
-      </tr>
-
-      {/* Dimensions */}
-      <tr className="border-b border-gray-200">
-        <td className="p-2 font-medium">Dimensions</td>
-        {compareProducts.map((product) => (
-          <td key={`dim-${product.id}`} className="p-2 text-center">
-            {product.length}" × {product.breadth}" × {product.height}"
-          </td>
-        ))}
-        {Array.from({ length: 4 - compareProducts.length }).map((_, i) => (
-          <td key={`empty-dim-${i}`} className="p-2"></td>
-        ))}
-      </tr>
-
-      {/* Description */}
-      <tr className="border-b border-gray-200 bg-gray-50">
-        <td className="p-2 font-medium">Description</td>
-        {compareProducts.map((product) => (
-          <td key={`desc-${product.id}`} className="p-2 text-sm">
-            <p className="line-clamp-4 text-gray-700">{product.description}</p>
-          </td>
-        ))}
-        {Array.from({ length: 4 - compareProducts.length }).map((_, i) => (
-          <td key={`empty-desc-${i}`} className="p-2"></td>
-        ))}
-      </tr>
-
-      {/* Layers */}
-      <tr className="border-b border-gray-200">
-        <td className="p-2 font-medium">Layers</td>
-        {compareProducts.map((product) => (
-          <td key={`layer-${product.id}`} className="p-2 text-sm">
-            <p className="text-gray-700">{product.additionalDescription}</p>
-          </td>
-        ))}
-        {Array.from({ length: 4 - compareProducts.length }).map((_, i) => (
-          <td key={`empty-layer-${i}`} className="p-2"></td>
-        ))}
-      </tr>
-
-      {/* Price */}
-      <tr className="border-b border-gray-200 bg-gray-50">
-        <td className="p-2 font-medium">Price</td>
-        {compareProducts.map((product) => (
-          <td key={`price-${product.id}`} className="p-2 text-center">
-            <p className="text-lg font-bold text-primary">
-              ₹{product.price.toLocaleString()}
-            </p>
-          </td>
-        ))}
-        {Array.from({ length: 4 - compareProducts.length }).map((_, i) => (
-          <td key={`empty-price-${i}`} className="p-2"></td>
-        ))}
-      </tr>
-    </tbody>
-  </table>
-</div>
-
+          </div>
+        )}
       </div>
     </div>
   );

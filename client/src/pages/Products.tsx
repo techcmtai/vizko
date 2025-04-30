@@ -125,6 +125,7 @@ export default function Products() {
         title: "Compare limit reached",
         description: "You can compare up to 4 products at a time. Please remove a product to add another.",
         variant: "destructive",
+        className: "top-4 right-4 fixed z-50",
       });
       return;
     }
@@ -134,11 +135,6 @@ export default function Products() {
     }
     
     setCompareProducts([...compareProducts, product]);
-    
-    // toast({
-    //   title: "Product added for comparison",
-    //   description: `Added ${product.title.split("\n\n")[0]} to comparison.`,
-    // });
   };
 
   // Remove product from comparison
@@ -169,22 +165,27 @@ export default function Products() {
 
           {/* Search and sort controls */}
           <div className="flex flex-col md:flex-row gap-4 mb-8">
-            <form onSubmit={handleSearch} className="relative flex-1">
-              <Input
-                type="text"
-                placeholder="Search products..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pr-10"
-              />
-              <Button 
-                type="submit" 
-                variant="ghost" 
-                className="absolute right-0 top-0 h-full px-3"
-              >
-                <Search className="h-4 w-4" />
-              </Button>
-            </form>
+            <div className="flex-1 flex items-center gap-4">
+              <form onSubmit={handleSearch} className="relative flex-1">
+                <Input
+                  type="text"
+                  placeholder="Search products..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pr-10"
+                />
+                <Button 
+                  type="submit" 
+                  variant="ghost" 
+                  className="absolute right-0 top-0 h-full px-3"
+                >
+                  <Search className="h-4 w-4" />
+                </Button>
+              </form>
+              <div className="text-sm text-gray-600 whitespace-nowrap">
+                Showing {filteredProducts.length} of {allProducts.length} products
+              </div>
+            </div>
             
             <div className="flex gap-2">
               <Select value={sortOption} onValueChange={setSortOption}>

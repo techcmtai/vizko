@@ -9,6 +9,7 @@ import About from "@/pages/About";
 import Products from "@/pages/Products";
 import ProductDetail from "@/pages/ProductDetail";
 import Contact from "@/pages/Contact";
+import Packaging from "@/pages/Packaging";
 import Layout from "@/components/Layout";
 
 function Router() {
@@ -20,6 +21,7 @@ function Router() {
         <Route path="/products" component={Products} />
         <Route path="/products/:productId" component={ProductDetail} />
         <Route path="/contact" component={Contact} />
+        <Route path="/packaging" component={Packaging} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

@@ -7,27 +7,42 @@ const slides = [
   {
     id: 1,
     image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
-    alt: "Premium mattress in luxury bedroom"
+    alt: "Premium mattress in luxury bedroom",
+    title: "Premium Mattresses. Global Comfort.",
+    description: "Export-quality comfort, crafted in India. Experience the perfect balance of luxury, support, and durability.",
+    ctaText: "Explore Products"
   },
   {
     id: 2,
     image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
-    alt: "Comfortable memory foam mattress"
+    alt: "Comfortable memory foam mattress",
+    title: "Luxury Redefined. Sleep Perfected.",
+    description: "Discover our premium collection of memory foam mattresses, designed for ultimate comfort and support.",
+    ctaText: "View Collection"
   },
   {
     id: 3,
     image: "https://images.unsplash.com/photo-1634646515707-de1b9cda79b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80",
-    alt: "Luxury mattress in elegant bedroom"
+    alt: "Luxury mattress in elegant bedroom",
+    title: "Sleep Like Royalty. Every Night.",
+    description: "Experience the luxury of premium bedding with our exclusive range of mattresses and accessories.",
+    ctaText: "Shop Now"
   },
   {
     id: 4,
     image: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
-    alt: "Orthopedic mattress in modern bedroom"
+    alt: "Orthopedic mattress in modern bedroom",
+    title: "Orthopedic Excellence. For Your Health.",
+    description: "Our orthopedic mattresses are designed to provide perfect spinal alignment and pressure relief.",
+    ctaText: "Learn More"
   },
   {
     id: 5,
     image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
-    alt: "Premium innerspring mattress"
+    alt: "Premium innerspring mattress",
+    title: "Innovative Comfort. Timeless Design.",
+    description: "Experience the perfect blend of traditional craftsmanship and modern technology in our mattresses.",
+    ctaText: "Discover More"
   }
 ];
 
@@ -73,21 +88,21 @@ export default function Hero() {
                 className="w-full h-full object-cover"
               />
               
-              {/* Overlay text - same for all slides */}
+              {/* Overlay text - unique for each slide */}
               <div className="absolute inset-0 z-20 flex items-center justify-center">
                 <div className="text-center max-w-4xl px-4">
                   <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-                    Premium Mattresses.<br/>Global Comfort.
+                    {slide.title}
                   </h1>
                   <p className="mt-6 text-white text-lg md:text-xl font-montserrat max-w-2xl mx-auto">
-                    Export-quality comfort, crafted in India. Experience the perfect balance of luxury, support, and durability.
+                    {slide.description}
                   </p>
                   <div className="mt-10">
                     <Link 
                       href="/products" 
                       className="bg-primary text-white font-lato font-medium px-8 py-3 rounded hover:bg-opacity-90 transition duration-300 inline-flex items-center"
                     >
-                      Explore Products
+                      {slide.ctaText}
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </div>

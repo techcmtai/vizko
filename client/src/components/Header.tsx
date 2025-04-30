@@ -50,6 +50,7 @@ export default function Header() {
                 { label: "Home", path: "/" },
                 { label: "About", path: "/about" },
                 { label: "Products", path: "/products" },
+                { label: "Packaging", path: "/packaging" },
                 { label: "Contact", path: "/contact" }
               ].map((link, index) => (
                 <Link
@@ -108,6 +109,7 @@ export default function Header() {
               { label: "Home", path: "/" },
               { label: "About", path: "/about" },
               { label: "Products", path: "/products" },
+              { label: "Packaging", path: "/packaging" },
               { label: "Contact", path: "/contact" }
             ].map((link, index) => (
               <Link

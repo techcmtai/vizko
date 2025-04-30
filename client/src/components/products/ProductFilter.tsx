@@ -193,54 +193,23 @@ export default function ProductFilter({ products, onFilterChange }: ProductFilte
         <div className="mb-4">
           <div className="flex justify-between items-center mb-2">
             <Label className="text-sm font-medium text-gray-700">Length (inches)</Label>
-            <div className="text-xs text-gray-500">
-              {filters.lengthRange[0]} - {filters.lengthRange[1]}"
-            </div>
           </div>
-          {/* <Slider 
-            defaultValue={[minLength, maxLength]} 
-            min={minLength} 
-            max={maxLength}
-            step={1}
-            value={[filters.lengthRange[0], filters.lengthRange[1]]}
-            onValueChange={(value) => setFilters({...filters, lengthRange: [value[0], value[1]]})}
-            className="my-4"
-          /> */}
-          <div className="flex gap-2">
-            <div className="w-1/2">
-              <Select 
-                value={filters.lengthRange[0].toString()} 
-                onValueChange={handleMinLengthChange}
-              >
-                <SelectTrigger className="h-8 text-xs">
-                  <SelectValue placeholder="Min Length" />
-                </SelectTrigger>
-                <SelectContent>
-                  {lengthOptions.map(length => (
-                    <SelectItem key={`min-length-${length}`} value={length.toString()}>
-                      {length}"
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="w-1/2">
-              <Select 
-                value={filters.lengthRange[1].toString()} 
-                onValueChange={handleMaxLengthChange}
-              >
-                <SelectTrigger className="h-8 text-xs">
-                  <SelectValue placeholder="Max Length" />
-                </SelectTrigger>
-                <SelectContent>
-                  {lengthOptions.map(length => (
-                    <SelectItem key={`max-length-${length}`} value={length.toString()}>
-                      {length}"
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+          <div className="w-full">
+            <Select 
+              value={filters.lengthRange[0].toString()} 
+              onValueChange={handleMinLengthChange}
+            >
+              <SelectTrigger className="h-8 text-xs">
+                <SelectValue placeholder="Select Length" />
+              </SelectTrigger>
+              <SelectContent>
+                {lengthOptions.map(length => (
+                  <SelectItem key={`length-${length}`} value={length.toString()}>
+                    {length}"
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
         </div>
         
@@ -248,54 +217,23 @@ export default function ProductFilter({ products, onFilterChange }: ProductFilte
         <div className="mb-4">
           <div className="flex justify-between items-center mb-2">
             <Label className="text-sm font-medium text-gray-700">Breadth (inches)</Label>
-            <div className="text-xs text-gray-500">
-              {filters.breadthRange[0]} - {filters.breadthRange[1]}"
-            </div>
           </div>
-          {/* <Slider 
-            defaultValue={[minBreadth, maxBreadth]} 
-            min={minBreadth} 
-            max={maxBreadth}
-            step={1}
-            value={[filters.breadthRange[0], filters.breadthRange[1]]}
-            onValueChange={(value) => setFilters({...filters, breadthRange: [value[0], value[1]]})}
-            className="my-4"
-          /> */}
-          <div className="flex gap-2">
-            <div className="w-1/2">
-              <Select 
-                value={filters.breadthRange[0].toString()} 
-                onValueChange={handleMinBreadthChange}
-              >
-                <SelectTrigger className="h-8 text-xs">
-                  <SelectValue placeholder="Min Breadth" />
-                </SelectTrigger>
-                <SelectContent>
-                  {breadthOptions.map(breadth => (
-                    <SelectItem key={`min-breadth-${breadth}`} value={breadth.toString()}>
-                      {breadth}"
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="w-1/2">
-              <Select 
-                value={filters.breadthRange[1].toString()} 
-                onValueChange={handleMaxBreadthChange}
-              >
-                <SelectTrigger className="h-8 text-xs">
-                  <SelectValue placeholder="Max Breadth" />
-                </SelectTrigger>
-                <SelectContent>
-                  {breadthOptions.map(breadth => (
-                    <SelectItem key={`max-breadth-${breadth}`} value={breadth.toString()}>
-                      {breadth}"
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+          <div className="w-full">
+            <Select 
+              value={filters.breadthRange[0].toString()} 
+              onValueChange={handleMinBreadthChange}
+            >
+              <SelectTrigger className="h-8 text-xs">
+                <SelectValue placeholder="Select Breadth" />
+              </SelectTrigger>
+              <SelectContent>
+                {breadthOptions.map(breadth => (
+                  <SelectItem key={`breadth-${breadth}`} value={breadth.toString()}>
+                    {breadth}"
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
         </div>
         
@@ -303,54 +241,23 @@ export default function ProductFilter({ products, onFilterChange }: ProductFilte
         <div className="mb-4">
           <div className="flex justify-between items-center mb-2">
             <Label className="text-sm font-medium text-gray-700">Thickness (inches)</Label>
-            <div className="text-xs text-gray-500">
-              {filters.heightRange[0]} - {filters.heightRange[1]}"
-            </div>
           </div>
-          {/* <Slider 
-            defaultValue={[minHeight, maxHeight]} 
-            min={minHeight} 
-            max={maxHeight}
-            step={1}
-            value={[filters.heightRange[0], filters.heightRange[1]]}
-            onValueChange={(value) => setFilters({...filters, heightRange: [value[0], value[1]]})}
-            className="my-4"
-          /> */}
-          <div className="flex gap-2">
-            <div className="w-1/2">
-              <Select 
-                value={filters.heightRange[0].toString()} 
-                onValueChange={handleMinHeightChange}
-              >
-                <SelectTrigger className="h-8 text-xs">
-                  <SelectValue placeholder="Min Thickness" />
-                </SelectTrigger>
-                <SelectContent>
-                  {heightOptions.map(height => (
-                    <SelectItem key={`min-height-${height}`} value={height.toString()}>
-                      {height}"
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="w-1/2">
-              <Select 
-                value={filters.heightRange[1].toString()} 
-                onValueChange={handleMaxHeightChange}
-              >
-                <SelectTrigger className="h-8 text-xs">
-                  <SelectValue placeholder="Max Thickness" />
-                </SelectTrigger>
-                <SelectContent>
-                  {heightOptions.map(height => (
-                    <SelectItem key={`max-height-${height}`} value={height.toString()}>
-                      {height}"
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+          <div className="w-full">
+            <Select 
+              value={filters.heightRange[0].toString()} 
+              onValueChange={handleMinHeightChange}
+            >
+              <SelectTrigger className="h-8 text-xs">
+                <SelectValue placeholder="Select Thickness" />
+              </SelectTrigger>
+              <SelectContent>
+                {heightOptions.map(height => (
+                  <SelectItem key={`height-${height}`} value={height.toString()}>
+                    {height}"
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
         </div>
         
