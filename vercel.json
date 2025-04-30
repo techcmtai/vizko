@@ -22,5 +22,6 @@
       "src": "/(.*)",
       "dest": "/dist/public/index.html"
     }
-  ]
+  ],
+  "rootDirectory": "client"
 }
