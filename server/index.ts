@@ -1,7 +1,9 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
+import { serveStatic, log } from "./vite";
 import cors from "cors";
+import { createServer } from "http";
+import { VercelRequest, VercelResponse } from '@vercel/node';
 
 const app = express();
 app.use(express.json());
@@ -42,31 +44,22 @@ app.use((req, res, next) => {
   next();
 });
 
-(async () => {
-  const server = await registerRoutes(app);
+// Register routes
+await registerRoutes(app);
 
-  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-    const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
+// Global error handler
+app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+  const status = err.status || err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
+  res.status(status).json({ message });
+});
 
-    res.status(status).json({ message });
-    throw err;
-  });
+// Serve static only in production (Vercel serves static frontend separately)
+if (process.env.NODE_ENV === "production") {
+  serveStatic(app);
+}
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
-    await setupVite(app, server);
-  } else {
-    serveStatic(app);
-  }
-
-  // ALWAYS serve the app on port 5000
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = 5000;
-  server.listen(port, () => {
-    log(`serving on port ${port}`);
-  });
-})();
+// Export Express app as a Vercel handler
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  app(req as any, res as any);
+}
